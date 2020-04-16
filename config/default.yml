@@ -1,0 +1,134 @@
+%YAML 1.2
+---
+
+- raw:
+    filename: 39014090.xlsx
+    sheet: Sheet1
+    col_name: 规格
+  wordbag:
+    filename: &filename1 词典库_39074000_v22.xlsx
+    supplier:
+      filename: *filename1
+      sheet: supplier_供应商
+      key_index: 0
+      value_index: 1
+    brand:
+      filename: *filename1
+      sheet: brand_品牌
+      key_index: 0
+      value_index: 1
+    grade:
+      filename: *filename1
+      sheet: grade_牌号
+      key_index: 0
+      value_index: 1
+    quality:
+      filename: *filename1
+      sheet: quality
+      key_index: 0
+      value_index: 1
+    grade_to_supplier:
+      filename: *filename1
+      sheet: grade_to_supplier
+      key_index: 0
+      value_index: 1
+    grade_to_brand:
+      filename: *filename1
+      sheet: grade_to_brand
+      key_index: 0
+      value_index: 1
+    brand_to_supplier:
+      filename: *filename1
+      sheet: brand_to_supplier
+      key_index: 0
+      value_index: 1
+
+- raw:
+    filename: 39014090_1912.xlsx
+    sheet: Sheet1
+    col_name: 规格
+  wordbag:
+    filename: &filename2 词典库_39014090_v7.xlsx
+    supplier:
+      filename: *filename2
+      sheet: supplier_供应商
+      key_index: 0
+      value_index: 1
+    brand:
+      filename: *filename2
+      sheet: brand_品牌
+      key_index: 0
+      value_index: 1
+    grade:
+      filename: *filename2
+      sheet: grade_牌号
+      key_index: 0
+      value_index: 1
+    quality:
+      filename: *filename2
+      sheet: quality
+      key_index: 0
+      value_index: 1
+    grade_to_supplier:
+      filename: *filename2
+      sheet: grade_to_supplier
+      key_index: 0
+      value_index: 1
+    grade_to_brand:
+      filename: *filename2
+      sheet: grade_to_brand
+      key_index: 0
+      value_index: 1
+    brand_to_supplier:
+      filename: *filename2
+      sheet: brand_to_supplier
+      key_index: 0
+      value_index: 1
+    fix_grade: true
+
+- raw:
+    filename: 39014000_1912.xlsx
+    sheet: Sheet1
+    col_name: 规格
+  wordbag:
+    filename: &filename3 词典库_39074000_v22.xlsx
+    product:
+      filename: *filename3
+      sheet: product_产品名称
+      key_index: 0
+      value_index: 1
+    supplier:
+      filename: *filename3
+      sheet: supplier_供应商
+      key_index: 0
+      value_index: 1
+    brand:
+      filename: *filename3
+      sheet: brand_品牌
+      key_index: 0
+      value_index: 1
+    grade:
+      filename: *filename3
+      sheet: grade_牌号
+      key_index: 0
+      value_index: 1
+    quality:
+      filename: *filename3
+      sheet: quality
+      key_index: 0
+      value_index: 1
+    grade_to_brand:
+      filename: *filename3
+      sheet: grade_to_brand
+      key_index: 0
+      value_index: 1
+    grade_to_supplier:
+      filename: *filename3
+      sheet: grade_to_supplier
+      key_index: 0
+      value_index: 1
+    brand_to_supplier:
+      filename: *filename3
+      sheet: brand_to_supplier
+      key_index: 0
+      value_index: 1

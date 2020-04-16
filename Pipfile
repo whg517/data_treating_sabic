@@ -1,0 +1,24 @@
+[[source]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+verify_ssl = true
+
+[dev-packages]
+tox = "*"
+pytest = "*"
+pytest-cov = "*"
+isort = "*"
+flake8 = "*"
+
+[packages]
+pandas = "*"
+numpy = "*"
+xlrd = "*"
+openpyxl = "*"
+pytest = "*"
+dateparser = "*"
+pyyaml = "*"
+isort = "*"
+
+[requires]
+python_version = "3.7"
