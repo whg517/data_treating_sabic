@@ -111,7 +111,7 @@ def process_mapping(x, mappings: Dict[str, Set], rule='>', return_rule='all'):
             raise
 
     if not processed_x:
-        return ''
+        return '', ''
 
     # 去真子集关系
     processed_x = duplicates(processed_x)

@@ -144,6 +144,40 @@ TODO
 
 **注意：** 所有数据文件均要有表头，否则确实第一行数据。对于原始数据文件，会导致列名错误无法运行。
 
+##### 词典库规则配置
+
+
+
+```yaml
+  wordbag:
+    filename: &filename1 词典库_39074000_v22.xlsx
+    supplier:
+      filename: *filename1
+      sheet: supplier_供应商
+      key_index: 0
+      value_index: 1
+    brand:
+      filename: *filename1
+      sheet: brand_品牌
+      key_index: 0
+      value_index: 1
+```
+
+上面配置片段中， `wordbag` 下面有两个规则，分别是 `supplier` 和 `brand` 。在程序运行的时候，会根据配置的这两个词典数据处理这两类数据。
+如果不想处理某些规则的数据只需要将该节点下的内容删除举行了。
+
+比如现在只处理 `brand` 的数据，规则就是这样的。
+
+```yaml
+  wordbag:
+    filename: &filename1 词典库_39074000_v22.xlsx
+    brand:
+      filename: *filename1
+      sheet: brand_品牌
+      key_index: 0
+      value_index: 1
+```
+
 ##### 多数据同时运行
 
 上面示例配置只能运行一个数据文件，如果多个数据文件同时运行，将顶层节点 `- raw:` 以下的所有内容复制然后粘贴到后面就行了。在 YAML 中 `- `
