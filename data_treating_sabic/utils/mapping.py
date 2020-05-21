@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, Set
+from typing import Dict, Set, Tuple
 
 import pandas as pd
 
@@ -8,14 +8,14 @@ from data_treating_sabic.utils import duplicates, load_data
 logger = logging.getLogger(__name__)
 
 
-def process_mapping_to_exist_col(mappings: Dict[str, Set], source, dest):
+def process_mapping_to_exist_col(mappings: Dict[str, Set], source, dest) -> str:
     if dest:
         return dest
     else:
         return process_mapping(source, mappings, return_rule='max')[1]
 
 
-def init_mappings(filename: str, sheet, key_index, value_index):
+def init_mappings(filename: str, sheet, key_index, value_index) -> Dict[str, set]:
     """
     初始化 mappings
     :return:
@@ -74,7 +74,7 @@ def build_mappings(df: pd.DataFrame, key_index, value_index, limit=0) -> Dict[st
     return mappings
 
 
-def process_mapping(x, mappings: Dict[str, Set], rule='>', return_rule='all'):
+def process_mapping(x, mappings: Dict[str, Set], rule='>', return_rule='all') -> Tuple[str, str]:
     """
     根据 mappings 映射所有值
     :param x:
@@ -92,37 +92,39 @@ def process_mapping(x, mappings: Dict[str, Set], rule='>', return_rule='all'):
     # global count
     # count += 1
     # print(f'\r{count}', end='')
-    if not x:
-        return ''
-    processed_x = {}
-    for k, v in mappings.items():
-        try:
-            if rule == '>':
-                if k.lower() in x.lower():
-                    processed_x.update({k: v})
-            elif rule == '<':
-                if x.lower() in k.lower():
-                    processed_x.update({k: v})
-            elif rule == '=':
-                if x.lower() == k.lower():
-                    processed_x.update({k: v})
-        except AttributeError:
-            print(k, v)
-            raise
 
-    if not processed_x:
-        return '', ''
+    processed_keys = ''
+    processed_values = ''
+    if x:
+        processed_x = {}
+        for k, v in mappings.items():
+            try:
+                if rule == '>':
+                    if k.lower() in x.lower():
+                        processed_x.update({k: v})
+                elif rule == '<':
+                    if x.lower() in k.lower():
+                        processed_x.update({k: v})
+                elif rule == '=':
+                    if x.lower() == k.lower():
+                        processed_x.update({k: v})
+            except AttributeError:
+                print(k, v)
+                raise
 
-    # 去真子集关系
-    processed_x = duplicates(processed_x)
+        if processed_x:
+            # 去真子集关系
+            processed_x = duplicates(processed_x)
 
-    processed_x_keys = sorted(processed_x.keys(), key=lambda i: len(i))
+            processed_x_keys = sorted(processed_x.keys(), key=lambda i: len(i))
 
-    if return_rule == 'max':
-        processed_x_key = [processed_x_keys[-1]]
-    elif return_rule == 'min':
-        processed_x_key = [processed_x_keys[0]]
-    else:
-        processed_x_key = processed_x_keys
+            if return_rule == 'max':
+                processed_x_key = [processed_x_keys[-1]]
+            elif return_rule == 'min':
+                processed_x_key = [processed_x_keys[0]]
+            else:
+                processed_x_key = processed_x_keys
 
-    return '|'.join(processed_x_key), '|'.join([i for k in processed_x_key for i in processed_x.get(k)])
+            processed_keys = '|'.join(processed_x_key)
+            processed_values = '|'.join([i for k in processed_x_key for i in processed_x.get(k)])
+    return processed_keys, processed_values
